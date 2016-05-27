@@ -155,3 +155,45 @@ def api_repositories():
     jsonout = flask.jsonify(output)
     jsonout.status_code = 200
     return jsonout
+
+
+@APP.route('/api/checkin-text', methods=['POST'])
+def api_checkin_text():
+    """Simple text checkin.
+
+    Uses a format similar to ini files which is easy to generate from a shell
+    script.  It has the following structure:
+
+        [repository fedora epel]
+        enabled: 1
+
+        [dirtree fedora epel]
+        5
+        5/i386
+        5/i386/debug
+        5/i386/debug/repodata
+
+    If we decide to start including file information, it can appear indented below the directory names.
+    """
+    flask.abort(404)
+
+
+@APP.route('/api/checkin-json', methods=['POST'])
+def api_checkin_json():
+    """JSON checkin.
+
+    Accepts JSON with the following structure:
+
+        {
+            "fedora epel": {
+                "dirtree": {
+                    "5": {},
+                    "5/i386": {},
+                    "5/i386/debug": {},
+                    "5/i386/debug/repodata": {}
+                },
+                "enabled": "1"
+            }
+        }
+    """
+    flask.abort(404)
